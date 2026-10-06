@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript">
+        function animaTabela(opcao) {
+
+            const tabela = document.getElementById("tabelaAlunos");
+
+            if (opcao == 'over') {
+                tabela.style.backgroundColor = "red";
+                tabela.style.fontSize = "20px";
+                tabela.style.transform = "rotate(30deg)";
+                tabela.style.transitionDuration = "3s";
+            }
+
+            else if (opcao == 'out') {
+                tabela.style.backgroundColor = "white";
+                tabela.style.fontSize = "16px";
+                tabela.style.transform = "rotate(0deg)";
+                tabela.style.transitionDuration = "1s";
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <img src=".jpg" width="100px">
+    
+
+
+</body>
+</html>

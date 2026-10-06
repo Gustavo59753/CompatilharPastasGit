@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo Minado</title>
+    <style>
+
+        body {
+            font-family: sans-serif;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            margin-top: 5vh;
+        }
+
+        .quadrado {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .bomba {
+            background-color: red;
+        }
+
+        .vazio {
+            background-color: beige;
+        }
+
+        .btn {
+            height: 100%;
+            width: 100%;
+            background-color: lightgreen;
+        }
+
+        .botoes {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        button:disabled {
+            color: black;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-evenly;
+            margin: 5vh;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Campo minado</h1>
+    <header>
+        <div>Tamanho<br><input type="number" id="tamanho" value="10" min="1"></div>
+        <div>Quantidade de Bombas<br><input type="number" id="qtdBombas" value="10" min="1"></div>
+        <button onclick="jogo()">Enviar</button>
+    </header>
+    <hr>
+    <main>
+        <table>
+            <tbody id="tabela">
+                
+            </tbody>
+        </table>
+    </main>
+    <div class="botoes">
+        <button onclick="jogo()">Resetar</button>
+    </div>
+
+<script>
+    //
+
+
+
+const defVariaveis = () => {
+    let tamanho = Number(document.querySelector("#tamanho").value);
+    tamanho *= tamanho;
+    let qtdBombas = Number(document.querySelector("#qtdBombas").value);
+    let campo = new Array(tamanho);
+    return {t: tamanho, b: qtdBombas, c: campo}
+}
+
+    let tamanho = defVariaveis().t;
+    let = linha = Math.sqrt(tamanho);
+    let qtdBombas = defVariaveis().b;
+    let campo = defVariaveis().c;
+
+const jogo = () => {
+    tamanho = defVariaveis().t;
+    linha = Math.sqrt(tamanho)
+    qtdBombas = defVariaveis().b;
+    campo = defVariaveis().c;
+
+    console.log(tamanho)
+    console.log(linha)
+    console.log(qtdBombas)
+    console.log(campo)
+
+    if (qtdBombas > tamanho) {
+        console.log("Muitas Bombas");
+        return;
+    }
+    document.querySelector("main").innerHTML = `<table>
+            <tbody id="tabela">
+                
+            </tbody>
+        </table>`;
+    for (let i=0; i<tamanho; i++) {
+        campo[i] = {n: 0, aberto: false};
+    }
+    for (let b=0; b<qtdBombas; b++) {
+        let i = Math.round(Math.random() * (tamanho-1));
+        if (campo[i].n == -1) {
+            b--;
+        } else {
+            campo[i].n = -1;
+        }
+    }
+    for (let i=0; i<tamanho; i++) {
+        let posicoes = [i-linha, i+linha];
+        let direita = [i+1, i-linha+1, i+linha+1];
+        direita = direita.filter((p) => {
+            return ((p) % linha != 0);
+        });
+        let esquerda = [i-1, i-linha-1, i+linha-1];
+        esquerda = esquerda.filter((p) => {
+            return ((p) % linha != (linha-1));
+        });
+        if (campo[i].n == -1) {
+            posicoes.forEach((p) => {
+                if (campo[p] != null && campo[p].n != -1) {
+                    campo[p].n++;
+                }
+            });
+            direita.forEach((p) => {
+                if (campo[p] != null && campo[p].n != -1) {
+                    campo[p].n++;
+                }
+            });
+            esquerda.forEach((p) => {
+                if (campo[p] != null && campo[p].n != -1) {
+                    campo[p].n++;
+                }
+            });
+        }
+    }
+
+    let display = document.querySelector("#tabela");
+    let row = ``;
+    for (let i=0; i<tamanho; i++) {
+        let pularLinha = (i+1) % (linha);
+        row += fazerLinha(i);
+        if (pularLinha == 0) {
+            display.innerHTML += `<tr>${row}</tr>`;
+            row = ``;
+        }
+    }
+    bandeira();
+}
+
+const fazerLinha = (i) => {
+    return`<td class="quadrado vazio"><button id="${'p'+i}" onclick="botao(${i})" class="btn"></button></td>`;
+}
+
+const derrota = () => {
+    for (let i=0; i<tamanho; i++) {
+        let btn = document.querySelector(`${'#p'+i}`);
+        btn.disabled = true;
+        if (campo[i].n == -1) {
+            btn.style.backgroundColor = '#ff0000ff';
+            campo[i].aberto = true;
+            btn.textContent = "💣";
+        }
+    }
+}
+
+const vitoria = () => {
+    for (let i=0; i<tamanho; i++) {
+        let btn = document.querySelector(`${'#p'+i}`);
+        btn.style.backgroundColor = "lightblue";
+        if (campo[i].n == -1) {
+            btn.textContent = "🚩";
+        }
+        btn.disabled = true;
+    }
+}
+
+const botao = (num) => {
+    let btn = document.querySelector(`${'#p'+num}`);
+    if (campo[num].aberto == false) {
+    campo[num].aberto = true;
+    if (campo[num].n == -1) {
+        btn.style.backgroundColor = '#ff0000ff';
+        btn.textContent = "💣";
+        derrota();
+        return
+    }
+    btn.style.backgroundColor ='#00000000';
+    if (campo[num].n != 0) {
+        btn.textContent = campo[num].n;
+    }
+    if (campo[num].n == 0) {
+        let posicoes = [num-linha, num+linha];
+        posicoes = posicoes.filter((p) => {
+            if ((campo[p] != null) && (campo[p].aberto == false)) {
+                return (campo[p] != null) && (campo[p].aberto == false);
+            }
+        });
+        let direita = [num+1, num-linha+1, num+linha+1];
+        direita = direita.filter((p) => {
+            if ((p % linha != 0) && (campo[p] != null) && (campo[p].aberto == false)) {
+                return (p % linha != 0) && (campo[p] != null) && (campo[p].aberto == false);
+            }
+        });
+        let esquerda = [num-1, num-linha-1, num+linha-1];
+        esquerda = esquerda.filter((p) => {
+            if ((p % linha != (linha-1)) && (campo[p] != null) && (campo[p].aberto == false)) {
+                return (p % linha != (linha-1)) && (campo[p] != null) && (campo[p].aberto == false);
+            }
+        });
+        posicoes.forEach((p) => {
+            botao(p);
+        });
+        direita.forEach((p) => {
+            botao(p);
+        });
+        esquerda.forEach((p) => {
+            botao(p);
+        });
+    }
+    let ganhou = true;
+    campo.forEach((p) => {
+        if (p.aberto == false && p.n != -1) {
+            ganhou = false;
+        }
+    });
+    if (ganhou) {
+        vitoria();
+        return;
+    }
+    }
+}
+const bandeira = () => {
+    campo.forEach((p, i) => {
+  const btn = document.querySelector(`#p${i}`);
+  
+  btn.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    
+    if (p.aberto) return; 
+
+    if (btn.textContent === "🚩") {
+      btn.textContent = "";
+      btn.aberto = true;
+    } else {
+      btn.textContent = "🚩";
+      btn.aberto = false;
+    }
+  });
+});
+}
+
+jogo()
+</script>    
+</body>
+</html>

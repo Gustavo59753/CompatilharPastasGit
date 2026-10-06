@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        const objeto = {
+            nome: "Maria",
+            idade: 25,
+            ativo: true
+        }
+
+        const jsonString = JSON.stringify(objeto);
+        console.log(jsonString);
+
+        console.log("de volta a obj");
+        const voltaObj = JSON.parse(jsonString);
+        console.log(voltaObj);
+        console.log(voltaObj.nome);
+        console.log(voltaObj.idade);
+
+        console.log(parseInt("42")); //42
+        console.log(parseInt("42.9")); //42
+        console.log(parseInt("abc")); //NaN
+
+        console.log(parseFloat("42.9")); //42.9
+        console.log(parseFloat("100")); //100.0
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

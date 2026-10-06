@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Save LocalStorage</title>
+</head>
+<body>
+    <h2>Cadastro</h2>
+
+    <form id="form">
+    <label>Nome:</label>
+    <input type="text" id="nome">
+
+    <br><br>
+
+    <label>E-mail:</label>
+    <input type="text" id="email">
+
+    <br><br>
+
+    <label>Cidade:</label>
+    <input type="text" id="cidade">
+
+    <br><br>
+
+    <button onclick="salvar()">Salvar Agora</button>
+    <button onclick="limpar()">Limpar</button>
+    </form>
+    <p id="status"></p>
+
+    <script>
+        document.querySelector("#nome").value = localStorage.nome || ""
+        document.querySelector("#email").value = localStorage.email || ""
+        document.querySelector("#cidade").value = localStorage.cidade || ""
+
+        const salvar = () => {
+            localStorage.setItem("nome", document.querySelector("#nome").value)
+            localStorage.setItem("email", document.querySelector("#email").value)
+            localStorage.setItem("cidade", document.querySelector("#cidade").value)
+            document.querySelector("#status").textContent = "Salvo"
+        }
+
+        setInterval(salvar(), 3000)
+
+        const limpar = () => {
+            localStorage.clear()
+            document.querySelector("#form").reset()
+            document.querySelector("#status").textContent = "Formulário limpo"
+        }
+    </script>
+</body>
+</html>

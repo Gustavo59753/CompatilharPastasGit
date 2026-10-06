@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Array</title>
+	<script>
+		const tecnico = ["LP", "BD", "DAW"];
+        const medio = ["Matemática", "Português", "Biologia"];
+
+        const formacaoCompleta = tecnico.concat(medio);
+
+        console.log("------Arrays concatenados------");
+        console.log(formacaoCompleta);
+
+        //slice - copia parte do array
+        const formacaoBasica = medio.slice(0, 2);
+
+        console.log("------ Slice ------");
+        console.log(formacaoBasica);
+
+        //reverse - inverte o array
+        console.log("Antes do reverse: ");
+        console.log(tecnico);
+
+        tecnico.reverse();  
+
+        console.log("Depois do reverse: ");
+        console.log(tecnico);
+
+        //join - transforma array em string
+        const valores = ["23", "03", "2026"];
+        const dataFinal = valores.join("/");
+
+        console.log("------ Join ------");
+        console.log("Data final: ", dataFinal);
+
+        //sort - organiza o array e altera o array original
+        console.log("---- Sort com texto ----");
+
+        const instrumentos = ["Guitarra", "Baixo", "Violão"];
+
+        console.log("Antes: ");
+        console.log(instrumentos);
+
+        instrumentos.sort();
+
+        console.log("Depois: ");
+        console.log(instrumentos);
+
+        //sort com números
+        console.log("---- Sort com números ----");
+
+        let idades = [32,21,15,71,57,43,12];
+
+        console.log("Antes: ");
+        console.log(idades);
+
+        //ordenação correta para números
+        idades.sort(function(a, b) {
+            return a - b; //Nr neg -> priimeiro número vem antes
+        });
+
+        console.log("Depois: ");
+        console.log(idades);
+
+        //map - cria um novo array transformando os elementos do array original
+        console.log("---- Map com números ----");
+        const numeros1 = [1, 2, 3];
+        console.log("Original: ", numeros1);
+        
+        const dobro = numeros1.map(num => num * 2);
+        console.log("Dobro: ", dobro);
+
+        console.log("---- Map com strings ----");
+        const alunos = ["Maria", "Ana", "João"];
+        console.log("Alunos: ", alunos);
+
+        const turma = alunos.map(aluno => aluno + " - DS");
+        console.log("Turma: ", turma);
+
+        const numeros2 = [1, 2, 3, 4];
+        console.log("Array: ", numeros2);
+
+        //Reduce - reduz o array a um único valor acumulando os resultados
+
+        const soma = numeros2.reduce((acumulador, num) => {
+            return acumulador + num;
+        }, 0);
+
+        let qtd = numeros2.length;
+
+        let media = soma / qtd;
+
+        console.log("Média: ", media);
+
+        //findIndex - localiza o índice do primeiro elemento que satisfaz a condição
+        let frutas = ["Banana", "Pêra", "Uva", "Maçã"];
+
+        const buscaUva = frutas.findIndex(
+            (fruta) => {
+                return fruta === "Uva";
+            }
+        );
+        console.log("Posição da Uva: " + buscaUva); //2
+
+        //includes - verifica se um elemento existe no array, retorna true ou false
+        let nomesTeste = ["Matheus", "Lucas", "João"];
+        console.log(nomesTeste.includes("Simone")); //false
+
+        //find - localiza na lista o primeiro elemento que satisfaz a condição e retorna o valor do elemento
+        let notas = [6, 8, 10, 4.5, 7, 9.8, 2];
+
+        let reprovado = notas.find(x => x < 6); //4.5
+        console.log(reprovado);
+
+        //some: se pelo menos um return da iteração for verdadeiro, ele retorna true
+        console.log(nomesTeste.some(nome => nome === 'Lucas'));
+
+        //every: verifica se todos os itens de um array ou de um obj atendem a uma condição/valor.
+        const aprovados = notas.every(x => x >= 6); //false
+
+        if (aprovados) {
+            console.log("Todos aprovados!");
+        } else {
+            console.log("Existem alunos sem média!");
+        }
+
+        //filter - retorna um array com a lista de valores que durante a sua iteração retornaram um valor verdadeiro
+        var precos = [1.99, 2.50, 100, 200, 5, 9, 2];
+
+        var baratos = precos.filter(x => x <= 5);
+        console.log(baratos);
+
+        const carros = ['Ford', 'Fiat', 'Honda'];
+
+        console.log("Array original: ", carros);
+        
+        // Função anônima
+        carros.forEach(function(item, index) {
+            console.log(index + " - " + item.toUpperCase());
+        });
+
+        // Arrow function
+        carros.forEach(item => {
+            console.log(item.toUpperCase());
+        });
+
+        // Modificando o array
+        carros.forEach((item, index, array) => {
+            array[index] = 'Carro ' + item;
+        })
+
+        console.log("Array modificado: ", carros);
+
+        // Modificando o array para aplicar descontos
+        let valoresProdutos = [55.00, 40.00, 25.50];
+
+        valoresProdutos.forEach((item, index, array) => {
+            array[index] = item - (item * 0.1);
+        })
+
+        console.log("Produtos com descontos: ", valoresProdutos);
+
+        // Spread Operator
+        let v1 = [1,2,3];
+        console.log("v1: ", v1);
+
+        let v2 = [4,5,6];
+        console.log("v2: ", v2);
+
+        let vfinal = [...v1, ...v2];
+        console.log("Array final: ", vfinal);
+
+        let arr = ['a','b','c'];
+        let arr2 = ['d','e','f'];
+
+        arr = [...arr, ...arr2];
+
+        console.log(arr);
+        // ['a', 'b', 'c', 'd', 'e', 'f']
+	</script>
+</head>
+<body>
+    Arrays
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="identificaAluno()">
+    Olá, <span id="aluno"></span>
+    <form>
+        <input type="text" name="ra" id="ra">
+        <button type="button" onclick="gravar();">Gravar</button>
+        <hr>
+        <button type="button" onclick="ler();">Ler RA</button>
+        <button type="button" onclick="remover();">Remover RA</button>
+    </form>
+</body>
+</html>
+
+<script>
+    const identificaAluno = () => {
+        const obj = localStorage.getItem("ra")
+        if(obj != null) document.querySelector("#aluno").innerText = obj;
+        else document.querySelector("#aluno").innerText = "";
+    }
+
+    function gravar(){
+        //localStorage.ra = document.querySelector("#ra");
+        //JSON => localStorage("chave", JSON.stringfy(objeto)) - salvar. JSON.parse(localStorage.getItem("chave")) - carregar
+        localStorage.setItem("ra", document.querySelector("#ra").value);
+        alert("RA gravado");
+        document.querySelector("#ra").value = "";
+        identificaAluno()
+    }
+
+    function ler(){
+        //alert(localStorage.getItem("ra"));
+        let obj = localStorage.ra
+        if (obj) {
+            alert(obj)
+        } else {
+            alert("Inexistente")
+        }
+    }
+
+    const remover = () => {
+        localStorage.removeItem("ra");
+        alert("Chave RA foi removida")
+    }
+</script>

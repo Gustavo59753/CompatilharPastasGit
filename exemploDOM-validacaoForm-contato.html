@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Conato</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .oculto {
+            display: none;
+        }
+
+        .erro {
+            color: red; 
+            font-size: 0.9em;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Contato</h2>
+    
+    <form id="formContato" onsubmit="return validarFormulario()">
+        <label>Nome:</label>
+        <input type="text" id="nome" size="30">
+        <div class="erro" id="erroNome"></div>
+
+        <label>E-mail:</label>
+        <input type="email" id="email">
+        <div class="erro" id="erroEmail"></div>
+
+        <label>Telefone:</label>
+        <input type="text" id="telefone" maxlength="11">
+        <div class="erro" id="erroTelefone"></div>
+
+        <label>Motivo do Contato:</label>
+        <select onchange="trataCampos(this.value)">
+            <option value="">Selecione</option>
+            <option value="suporte">Suporte</option>
+            <option value="financeiro">Financeiro</option>
+            <option value="outro">Outro</option>
+        </select>
+        <div class="erro" id="erroMotivo"></div>
+
+        <div id="campoSuporte" class="oculto">
+            <label>Número do Protocolo:</label>
+            <input type="text" id="protocolo">
+            <div class="erro" id="erroProtocolo"></div>
+        </div>
+
+        <div id="campoFinanceiro" class="oculto">
+            <label>Número da Fatura:</label>
+            <input type="text" id="fatura">
+            <div class="erro" id="erroFatura"></div>
+        </div>
+
+        <div id="campoOutro" class="oculto">
+            <label>Descreva o motivo:</label>
+            <textarea id="descricao"></textarea>
+            <div class="erro" id="erroDescricao"></div>
+        </div>
+
+        <label>Mensagem:</label>
+        <textarea id="mensagem" rows="5" cols="25"></textarea>
+        <div class="erro" id="erroMensagem"></div>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+        function trataCampos(opcao) {
+            const motivo = document.getElementById("motivo");
+            const campoSuporte = document.getElementById("campoSuporte"); 
+            const campoFinanceiro = document.getElementById("campoFinanceiro");
+            const campoOutro = document.getElementById("campoOutro");
+            const form = document.getElementById("formContato");
+
+            campoSuporte.classList.add("oculto");
+            campoFinanceiro.classList.add("oculto");
+            campoOutro.classList.add("oculto");
+
+            if (opcao === "suporte") {
+                campoSuporte.classList.remove("oculto"); 
+            }
+            if (opcao === "financeiro") {
+                campoFinanceiro.classList.remove("oculto");
+            }
+            if (opcao === "outro") {
+                campoOutro.classList.remove("oculto");
+            }
+        }
+
+        function validarFormulario() {
+            console.log("Chegou 1");
+            let valido = true;
+            let idErros = ["erroNome", "erroEmail", "erroTelefone", "erroProtocolo", "erroFatura"];
+            document.querySelectorAll(".erro").forEach(e => e.textContent = "");
+            console.log("Chegou 2");
+            document.querySelectorAll("input").forEach((i, index) => {
+                console.log(index + ", " + i.checkValidity() + ", " + i.validationMessage + ", " + idErros[index])
+                if (i.checkValidity() == false) {
+                    document.querySelector(`#${idErros[index]}`).textContent = i.validationMessage;
+                    valido = false;
+                }
+            });
+            return valido;
+        }
+
+        // document.querySelector("#formContato").addEventListener("submit", e => {
+        //     e.preventDefault();
+        //     validarFormulario();
+        // });
+    </script>
+</body>
+</html>

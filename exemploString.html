@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Exemplo Strings</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <script>
+        // alert ("Aula de DAW");
+        // var texto = prompt("Informe a diciplina");
+        // var prof = prompt("Informe o professor(a)");
+
+        // console.log("Aprendendo " + texto + ` em DAW com a prof ${prof}`);
+        
+        console.log("String para char");
+        let str = "hello";
+
+        let chars = [...str];   //spread operator
+        console.log(chars);     // ['h','e','l','l','o']
+
+        chars[2] = "X";
+        console.log(chars);      // ['h','e','X','l','o']
+
+        //extração de parte de uma string (pode usar slice() tb)
+        let texto = "Margulhando em Javascript.";
+        let txt =  texto.substr(0,11);
+        console.log(txt); //Mergulhando
+
+        texto = 'Unicamp';
+        console.log("Tamanho: " + texto.length);
+        
+        if (texto.length < 8) {
+            alert("A senha deve ter no mínimo 8 caracteres")
+        }
+
+        console.log(texto.toUpperCase());   //UNICAMP
+        console.log(texto.toLocaleLowerCase());     //unicamp
+
+        console.log ("--------charAt()--------");
+        console.log(texto.charAt(3)); //c
+
+        console.log("-------Split()-------");
+        texto = "02/09/2026";
+        let aux = texto.split("/"); // ["02","09","2026"]
+        console.log(aux[1]);
+
+        let mes;
+        if (aux[1] == '09') {
+            mes = 'Setembro';
+        }
+
+        console.log(`Limeira, ${aux[0]} de ${mes} de ${aux[2]}`);
+
+        let texto2 = "COTIL-UNICAMP-LIMEIRA";
+        console.log("-------indexOf-------");
+        console.log(texto2.indexOf('LIMEIRA'));
+        console.log(texto2.indexOf('@'))
+
+        //starsWith e endsWith
+        let nomeTeste = 'Simone';
+        console.log(nomeTeste.startsWith('Si')); //true
+        console.log(nomeTeste.startsWith('si')); //false
+        console.log(nomeTeste.endsWith('ni')); //false
+
+        //replace - substituir parte de uma string por outra
+        let nome = "André";
+        let comunicacao = "Olá, Sr. nomeusuario, informamos que a partir da presente data o senhor tem 50% de desconto em nossa loja"
+
+        console.log(comunicacao.replace("nomeusuario",nome));
+
+        //trim = remove os espaços em branco no início ou fim de uma string 
+        let login = "          andre@emailteste.com           ";
+        console.log(login);
+        console.log(login.trim()); //andre@emailteste.com
+
+        let n1 = 2;
+        let n2 = 6;
+
+        let media = (n1 + n2)/2;
+
+        let situacao = (media < 6) ? "reprovado" : "aprovado";
+        console.log(`Média: ${media}, Situação: ${situacao}`);
+    </script>
+</head>
+<body>
+    Strings
+</body>
+</html>

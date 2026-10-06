@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Objetos - criando objetos</title>
+
+    <script>
+        //criando objetos
+        var objetoVazio = {};
+        console.log("objeto vazio: ", objetoVazio);
+
+        // ou um objeto com atributos para definir um disciplina
+        var disciplina = {
+            sigla: "DAW",
+            nome: "Desenvolvimento de Aplicações Web",
+            numAulas: 3
+        }
+
+        console.log("disciplina.sigla: ", disciplina.sigla);
+        console.log("disciplina.nome: ", disciplina.nome);
+        console.log("disciplina.numAulas: ", disciplina.numAulas);
+
+        //alterando valores dos atributos do obj
+        disciplina.sigla = "BD";
+        disciplina.nome = "Banco de Dados";
+
+        //ou
+        disciplina['sigla'] = "BD";
+        disciplina['nome'] = "Banco de Dados";
+
+        console.log("disciplina.sigla: ", disciplina['sigla']);
+        console.log("disciplina.nome: ", disciplina['nome']);
+
+        //criando objetos com create
+        var curso = new Object();
+        curso.nome = 'JavaScript Básico';
+        curso.responsavel = 'Simone';
+
+        /*equivalente
+        var curso = {
+            nome: 'JavaScript Báscio'
+            responsavel: 'Simone'
+        };
+        */ 
+
+        console.log("curso.nome: ", curso.nome);
+        console.log("curso.responsavel", curso.responsavel);
+        console.log("disciplina.nome: ", disciplina.nome);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

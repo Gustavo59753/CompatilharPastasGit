@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos</title>
+    <script type="text/javascript">
+        const exibirValor = () => {
+            const capacitacao = document.getElementById('capacitacao').value;
+            document.getElementById('valorCapacitacao').textContent = capacitacao;
+        }
+
+        const contarCaracteres = () => {
+            const tamMax = 10 ;
+            let tamTxtDigitado = document.getElementById('nome').value.length;
+
+            document.getElementById('numeroCaracteres').textContent = tamTxtDigitado;
+
+            document.getElementById('numeroCaracteresRest').textContent = tamMax - tamTxtDigitado;
+        }
+
+        const exibirCor = () => {
+            let cor = document.getElementById('corPreferida').value;
+            document.getElementById("texto").style.color = cor;
+            document.getElementById("quadrado").style.backgroundColor = cor;
+            document.getElementById("som").style.backgroundColor = cor;
+            document.getElementById("sub").style.backgroundColor = cor;
+        }
+
+        const somasub = (operacao) => {
+            num = parseInt(document.getElementById("resultado").textContent)
+            if (operacao == '+') {
+                num++;
+            } else if (operacao == '-') {
+                num--;  document.getElementById("sub").disa
+            }
+            
+            if (num < 0) {
+                num = 0
+            }
+
+            document.getElementById("resultado").textContent = num;
+
+            if (num == 0) {
+                document.getElementById("sub").disabled = true;
+            } else {
+                document.getElementById("sub").disabled = false;
+            }
+        }
+
+        const changeMode = () => {
+            const mode = document.querySelector("#mode").value;
+
+            if (mode == 1) {
+                document.body.style.backgroundColor = "#121212"
+                document.body.style.color = "#ffffff"
+            } else {
+                document.body.style.backgroundColor = "#ffffff"
+                document.body.style.color = "#000000"
+            }
+
+            if (mode == 1) {
+                document.body.className = "dark"
+            } else {
+                document.body.className = "light"
+            }
+        }
+    </script>
+</head>
+<body>
+
+    Capacitação:<br>
+    <input type="range" id="capacitacao" min="0" max="10" value="0"
+    oninput="exibirValor();">
+    <span id="valorCapacitacao"><small>0</small></span>
+    
+    <br><br>
+
+    Nome:<br>
+    <input type="text" id="nome" maxlength="10"
+            onkeyup="contarCaracteres();">
+
+    <span id="numeroCaracteres">0</span> caracteres /
+    <span id="numeroCaracteresRest">10</span> caracteres restantes
+
+    <br><br>
+    Cor preferida:<br>
+    <input type="color" id="corPreferida" onchange="exibirCor();">
+
+    <br><br>
+    <span id="texto">Minha cor preferida</span>
+    <div id="quadrado" style="height: 50vh; width: 50vw; border: 1px solid black;"></div>
+
+    <br><br>
+
+    <div id="produto">
+
+        <img src="" alt="Produto " width="50">
+        <br><br>
+
+        <input type="button" style="height: 40vh; width: 40vw; border: 1px solid black; font-size: 10vw;" id="sub" value="-" onclick="somasub('-')" disabled>
+
+        <span id="resultado">0</span>
+
+        <input type="button" style="height: 40vh; width: 40vw; border: 1px solid black; font-size: 10vw;" id="som" value="+" onclick="somasub('+')">
+
+    </div>
+
+    <br><br>
+
+    <div style="text-align: end; font-size: 10px;">
+        Light
+        <input type="range" value="0" min="0" max="1" id="mode" style="width: 30px;" onchange="changeMode()">
+        Dark
+    </div>
+
+    <h1>Aprendendo Light e Dark Mode</h1>
+
+    <button onclick="
+    let cor = '#';
+    for (let i=0; i<4; i++) {
+        let c = (Math.round(Math.random() * 15 + 1)).toString(16);
+        console.log(c)
+        cor += c;
+    };
+    document.body.style.backgroundColor = cor;
+    ">:)</button>
+</body>
+</html>

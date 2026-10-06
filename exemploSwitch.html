@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Switch</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script>
+        const fazerPedido = () => {
+            let pedido = parseInt(prompt("O que você deseja pedir?"));
+
+            switch(pedido) {
+                case 1:
+                    alert("Você pediu sorvete");
+                    break;
+                    
+                case 2:
+                    alert("Você pediu suco");
+                    break;
+                    
+                case 3:
+                    alert("Você pediu coca gelada");
+                    break;
+                    
+                case 4:
+                    alert("Você pediu água natural");
+                    break;
+                    
+                default:
+                    alert("Ops! Não temos essa opção!");
+                    break;
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Cardápio</h1>
+    <ol>
+        <li>Sorvete</li>
+        <li>Suco</li>
+        <li>Coca gelada</li>
+        <li>Água natural</li>
+    </ol>
+    <button onclick="fazerPedido();">Pedir</button>
+    
+</body>
+</html>

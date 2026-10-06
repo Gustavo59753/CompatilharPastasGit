@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <img id="slide" src="img/cheetah.jpg" width="300">
+</body>
+</html>
+
+<style>
+    body{
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    img{
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+</style>
+
+<script>
+    const imagens = ["img/cheetah.jpg", "img/lion.webp", "img/dog-cat.jpg"]
+    let index = 0;
+    setInterval(trocaImg, 2000);
+    //setTimeout, clearTimeout, clearInterval
+    function trocaImg(){
+        index++;
+        if (index >= imagens.length) {
+            index = 0;
+        }
+        document.getElementById("slide").src = imagens[index];
+    }
+</script>
